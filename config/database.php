@@ -97,6 +97,19 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'sysweb' => [
+            'driver' => 'pgsql',
+            'host' => env('SYSWEB_DB_HOST', '127.0.0.1'),
+            'port' => env('SYSWEB_DB_PORT', '5432'),
+            'database' => env('SYSWEB_DB_DATABASE', 'sysweb'),
+            'username' => env('SYSWEB_DB_USERNAME', 'postgres'),
+            'password' => env('SYSWEB_DB_PASSWORD', 'postgres'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DB_URL'),
