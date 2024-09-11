@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\MarcaVeiculoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/marcaveiculo', [MarcaVeiculoController::class, 'index'])->middleware(['auth', 'verified'])->name('marcaveiculo.index');
+Route::delete('/marcaveiculo/{id}', [MarcaVeiculoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('marcaveiculo.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
