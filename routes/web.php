@@ -7,6 +7,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/marcaveiculo', function () {
+    return view('marcaveiculo');
+})->middleware(['auth', 'verified'])->name('marcaveiculo.index');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
