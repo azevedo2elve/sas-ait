@@ -10,6 +10,14 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
+                    <!-- Botão de Cadastro -->
+                    <div class="mt-4 mb-6">
+                        <a href="{{ route('marcaveiculo.create') }}"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Cadastrar Nova Marca/Modelo
+                        </a>
+                    </div>
+
                     <!-- Formulário para filtro da marca modelo -->
                     <form method="GET" action="{{ route('marcaveiculo.index') }}">
                         <div class="flex items-center space-x-4">
@@ -32,6 +40,25 @@
                         </div>
                     </form>
 
+                    @if (session('success'))
+                        <div class="alert alert-success p-4 bg-green-500 text-white rounded shadow-lg fade-out mt-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger p-4 bg-red-500 text-white rounded shadow-lg fade-out mt-4">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    @if (session('delete'))
+                        <div class="alert alert-danger p-4 bg-indigo-700 text-white rounded shadow-lg fade-out mt-4">
+                            {{ session('delete') }}
+                        </div>
+                    @endif
+
+
                 </div>
 
                 <!-- Exibição dos Resultados -->
@@ -46,7 +73,7 @@
                                     Marca
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                    Data da Inserção
+                                    Data da Atualização
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                     Ação
@@ -63,7 +90,7 @@
                                         {{ $veiculo->descricao }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                                        {{ $veiculo->data_insercao }}
+                                        {{ $veiculo->data_atualizacao }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                         <!-- Formulário para deletar -->
