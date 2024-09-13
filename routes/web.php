@@ -9,7 +9,17 @@ Route::get('/', function () {
 });
 
 Route::get('/marcaveiculo', [MarcaVeiculoController::class, 'index'])->middleware(['auth', 'verified'])->name('marcaveiculo.index');
-Route::delete('/marcaveiculo/{id}', [MarcaVeiculoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('marcaveiculo.destroy');
+Route::delete('/marcaveiculo/{id}', [MarcaVeiculoController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('marcaveiculo.destroy');
+Route::get('/marcaveiculo/create', function (){
+    return view('marcaveiculo_create');
+})->middleware(['auth', 'verified'])->name('marcaveiculo.create');
+Route::post('/marcaveiculo', [MarcaVeiculoController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('marcaveiculo.store');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
