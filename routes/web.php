@@ -5,10 +5,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/marcaveiculo', [MarcaVeiculoController::class, 'index'])->middleware(['auth', 'verified'])->name('marcaveiculo.index');
+Route::get('/marcaveiculo', [MarcaVeiculoController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('marcaveiculo.index');
 Route::delete('/marcaveiculo/{id}', [MarcaVeiculoController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('marcaveiculo.destroy');

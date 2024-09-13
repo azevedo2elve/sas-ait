@@ -10,13 +10,21 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
-                    <!-- Botão de Cadastro -->
-                    <div class="mt-4 mb-6">
+                    <!-- Container Flex para os Botões -->
+                    <div class="mt-4 mb-6 flex space-x-4">
+                        <!-- Botão de Cadastro -->
                         <a href="{{ route('marcaveiculo.create') }}"
                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             Cadastrar Nova Marca/Modelo
                         </a>
+
+                        <!-- Botão de Atualização -->
+                        <a href="{{ route('marcaveiculo.create') }}"
+                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            Atualizar Base de Dados
+                        </a>
                     </div>
+
 
                     <!-- Formulário para filtro da marca modelo -->
                     <form method="GET" action="{{ route('marcaveiculo.index') }}">
