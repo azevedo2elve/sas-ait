@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('marcaveiculo.index')" :active="request()->routeIs('marcaveiculo.index')">
                         {{ __('Marca Veículo') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('sessaomobile.index')" :active="request()->routeIs('sessaomobile.index')">
+                        {{ __('Sessão Mobile') }}
+                    </x-nav-link>
                 </div>
             </div>
 
