@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\MarcaVeiculoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SessaoMobileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
 });
 
+// Marca Veículo
 Route::get('/marcaveiculo', [MarcaVeiculoController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('marcaveiculo.index');
@@ -17,11 +19,20 @@ Route::delete('/marcaveiculo/{id}', [MarcaVeiculoController::class, 'destroy'])
 Route::get('/marcaveiculo/create', function (){
     return view('marcaveiculo_create');
 })->middleware(['auth', 'verified'])->name('marcaveiculo.create');
+Route::post('/marcaveiculo/atualizarbase', [MarcaVeiculoController::class, 'atualizarbase'])
+    ->middleware(['auth', 'verified'])
+    ->name('marcaveiculo.atualizarbase');
 Route::post('/marcaveiculo', [MarcaVeiculoController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('marcaveiculo.store');
 
-
+// Sessão Mobile
+Route::get('/sessaomobile', [SessaoMobileController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('sessaomobile.index');
+Route::get('/sessaomobile', [SessaoMobileController::class, 'procurarEfetivo'])
+    ->middleware(['auth', 'verified'])
+    ->name('sessaomobile.procurarefetivo');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
