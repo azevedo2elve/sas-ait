@@ -12,7 +12,7 @@ class MarcaVeiculoController extends Controller
     public function index(Request $request){
          $query = MarcaVeiculo::query();
 
-         dd($query);
+        //  dd($query);
 
          if ($request->has('marca')) {
             $marca = $request->input('marca');
@@ -36,7 +36,7 @@ class MarcaVeiculoController extends Controller
         return redirect()->route('marcaveiculo.index')->with('delete', 'Veículo deletado com sucesso!');
     }
 
-    public function atualizarBase()
+    public function atualizarbase()
     {
         DB::connection('sysweb')->statement("
             INSERT INTO mobile_saida (imei, aplicacao, tipo, grupo, conteudo, gerado_push_gcm, status)
@@ -44,6 +44,8 @@ class MarcaVeiculoController extends Controller
             FROM dispositivo
             WHERE id_instancia_sistema = 13
         ");
+
+        return redirect()->route('marcaveiculo.index')->with('Atualizado', 'Atualização realizada com sucesso!');
     }
 
     public function store(Request $request)
@@ -70,7 +72,7 @@ class MarcaVeiculoController extends Controller
             ]);
 
             if ($request->input('atualizar_base') == "on") {
-                $this->atualizarBase();
+                $atualizar = $this->atualizarBase();
             }
 
             // Redirecionar com uma mensagem de sucesso
