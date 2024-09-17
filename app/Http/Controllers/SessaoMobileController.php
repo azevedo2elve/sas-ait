@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Efetivo;
 use App\Models\SessaoMobile;
 use Illuminate\Support\Facades\DB;
 
