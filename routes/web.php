@@ -47,6 +47,10 @@ Route::get('/liberardispositivo/procurardispositivo', [LiberarDispositivoControl
     ->middleware(['auth', 'verified'])
     ->name('liberardispositivo.procurardispositivo');
 
+Route::post('liberardispositivo/desbloquear/{device_id}', [LiberarDispositivoController::class, 'desbloquearDispositivo'])
+    ->middleware(['auth', 'verified'])
+    ->name('liberardispositivo.desbloqueardispositivo');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

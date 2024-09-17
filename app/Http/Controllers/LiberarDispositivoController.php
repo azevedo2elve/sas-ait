@@ -12,9 +12,16 @@ class LiberarDispositivoController extends Controller
         return view('liberardispositivo');
     }
 
-    public function desbloquearDispositivo(Request $request)
+    public function desbloquearDispositivo(Request $request, $device_id)
     {
-        
+
+        DB::connection('sysweb')->statement("
+            INSERT INTO mobile_saida (imei, aplicacao, tipo, grupo, conteudo, gerado_push_gcm, status)
+            VALUES (?, 31, 8, 1001, '{\"appBloqueado\":\"0\"}', 0, 0)
+            ", [$device_id]);
+
+
+        return redirect()->route('liberardispositivo.index')->with('Desbloqueado', 'Comando de desbloqueio enviado!');
     }
 
     public function procurarDispositivo(Request $request)
@@ -30,7 +37,7 @@ class LiberarDispositivoController extends Controller
         )
         ->where('device_id', 'like', '%' . $imei . '%')
         ->get();
-        
+
         return view('liberardispositivo', compact('dispositivos'));
     }
 }
