@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('sessaomobile.index')" :active="request()->routeIs('sessaomobile.index')">
                         {{ __('Sessão Mobile') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('liberardispositivo.index')" :active="request()->routeIs('liberardispositivo.index')">
+                        {{ __('Liberar Dispositivo') }}
+                    </x-nav-link>
                 </div>
             </div>
 
