@@ -30,9 +30,15 @@ Route::post('/marcaveiculo', [MarcaVeiculoController::class, 'store'])
 Route::get('/sessaomobile', [SessaoMobileController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('sessaomobile.index');
-Route::get('/sessaomobile', [SessaoMobileController::class, 'procurarEfetivo'])
+
+Route::get('/sessaomobile/procurarefetivo', [SessaoMobileController::class, 'procurarEfetivo'])
     ->middleware(['auth', 'verified'])
     ->name('sessaomobile.procurarefetivo');
+
+Route::post('/sessaomobile/deslogarefetivo/{id}', [SessaoMobileController::class, 'deslogarEfetivo'])
+    ->middleware(['auth', 'verified'])
+    ->name('sessaomobile.deslogarefetivo');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

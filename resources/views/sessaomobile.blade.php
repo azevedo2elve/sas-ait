@@ -16,7 +16,7 @@
                             <!-- Input Field -->
                             <div class="flex-grow">
                                 {{-- <label for="marca" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Marca</label> --}}
-                                <input type="text" name="marca" id="marca"
+                                <input type="number" name="matricula" id="matricula"
                                     class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
                                     value="{{ request('matricula') }}"
                                     placeholder="Matricula Efetivo">
@@ -31,6 +31,18 @@
                             </div>
                         </div>
                     </form>
+
+                    @if (session('deslogado'))
+                        <div class="bg-green-500 text-white p-4 rounded mb-4 mt-4">
+                            {{ session('deslogado') }}
+                        </div>
+                    @endif
+
+                    @if (session('offline'))
+                        <div class="bg-red-500 text-white p-4 rounded mb-4 mt-4">
+                            {{ session('offline') }}
+                        </div>
+                    @endif
 
                     @if (session('success'))
                         <div class="alert alert-success p-4 bg-green-500 text-white rounded shadow-lg fade-out mt-4">
@@ -64,27 +76,26 @@
 
                                     <div class="mt-4 flex items-center">
                                         <span class="mr-2 inline-block w-3 h-3 rounded-full {{ $efetivo->sessao && count($efetivo->sessao) > 0 ? 'bg-green-500' : 'bg-red-500' }}"></span>
-                                        <button class="ml-auto bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600"
-                                            onclick="deslogar({{ $efetivo->id }})">
-                                            Deslogar
-                                        </button>
+                                        <form action="{{ route('sessaomobile.deslogarefetivo', $efetivo->id) }}" method="POST" class="ml-auto">
+                                            @csrf
+                                            <button type="submit" class="bg-red-500 text-white font-semibold py-2 px-4 rounded hover:bg-red-600">
+                                                Deslogar
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
                     @else
-                        <p class="text-gray-500 dark:text-gray-300">Nenhum efetivo encontrado.</p>
+                        @if(isset($pesquisarealizada) && $pesquisarealizada)
+                            <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg my-4 p-6">
+                                <p class="text-gray-500 dark:text-gray-300 text-center font-semibold">Nenhum efetivo encontrado.</p>
+                            </div>
+                        @endif
                     @endif
-                    
-                </div>
-
-                <!-- Paginação -->
-                <div class="mt-4">
-                    {{-- {{ $resultados->links('pagination::tailwind') }} --}}
                 </div>
 
             </div>
-            
         </div>
     </div>
 </x-app-layout>

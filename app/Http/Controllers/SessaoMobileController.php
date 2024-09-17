@@ -29,7 +29,7 @@ class SessaoMobileController extends Controller
             'instancia_sistema.descricao as descricao_instancia_sistema'
         )
         ->join('instancia_sistema', 'efetivo.id_instancia_sistema', '=', 'instancia_sistema.id')
-        ->where('efetivo.matricula', $matricula)
+        ->where('efetivo.matricula', 'like', '%' . $matricula . '%')
         ->whereNull('efetivo.data_exclusao')
         ->get();
 
@@ -41,7 +41,29 @@ class SessaoMobileController extends Controller
                 ->get();
         }
 
+        $pesquisarealizada = true;
+
         // Retorna a resposta em JSON
-        return view('sessaomobile');
+        return view('sessaomobile', compact('efetivos', 'pesquisarealizada'));
     }
+
+    public function deslogarEfetivo($id)
+    {
+        // Busca o efetivo pelo ID e marca como deslogado
+        $sessao = SessaoMobile::where('id_efetivo', $id)
+            ->whereNull('data_exclusao')
+            ->first();
+
+        if ($sessao) {
+            // Marca a data de exclusão (ou atualiza o status de logout)
+            $sessao->data_exclusao = now();
+            $sessao->save();
+
+            return redirect()->back()->with('deslogado', 'Efetivo deslogado com sucesso!');
+        }
+
+        return redirect()->back()->with('offline', 'Efetivo está offline');
+    }
+
+
 }
